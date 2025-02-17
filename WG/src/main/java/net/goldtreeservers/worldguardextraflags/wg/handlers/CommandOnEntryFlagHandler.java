@@ -17,29 +17,43 @@ import com.sk89q.worldguard.session.MoveType;
 import com.sk89q.worldguard.session.Session;
 
 import net.goldtreeservers.worldguardextraflags.flags.Flags;
+import org.bukkit.plugin.Plugin;
+import org.bukkit.scheduler.BukkitRunnable;
 
 public class CommandOnEntryFlagHandler extends Handler
 {
-	public static final Factory FACTORY()
+
+	public static final Factory FACTORY(Plugin plugin)
 	{
-		return new Factory();
+		return new Factory(plugin);
 	}
 	
     public static class Factory extends Handler.Factory<CommandOnEntryFlagHandler>
     {
+		private final Plugin plugin;
+
+		public Factory(Plugin plugin)
+		{
+			this.plugin = plugin;
+		}
+
 		@Override
-        public CommandOnEntryFlagHandler create(Session session)
+        public CommandOnEntryFlagHandler create( Session session)
         {
-            return new CommandOnEntryFlagHandler(session);
+            return new CommandOnEntryFlagHandler(this.plugin, session);
         }
     }
-	
+
+	private final Plugin plugin;
+
 	private Collection<Set<String>> lastCommands;
 	    
-	protected CommandOnEntryFlagHandler(Session session)
+	protected CommandOnEntryFlagHandler(Plugin plugin, Session session)
 	{
 		super(session);
-		
+
+		this.plugin = plugin;
+
 		this.lastCommands = new ArrayList<>();
 	}
 
@@ -56,7 +70,15 @@ public class CommandOnEntryFlagHandler extends Handler
 				{
 					for(String command : commands_)
 					{
-						Bukkit.getServer().dispatchCommand(((BukkitPlayer) player).getPlayer(), command.substring(1).replace("%username%", player.getName())); //TODO: Make this better
+						new BukkitRunnable()
+						{
+							@Override
+							public void run()
+							{
+								Bukkit.getServer().dispatchCommand(((BukkitPlayer) player).getPlayer(), command.substring(1).replace("%username%", player.getName())); //TODO: Make this better
+
+							}
+						}.runTask(plugin);
 					}
 
 					break;

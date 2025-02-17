@@ -127,10 +127,10 @@ public class WorldGuardExtraFlagsPlugin extends JavaPlugin
 		this.sessionManager.registerHandler(BlockedEffectsFlagHandler.FACTORY(), null);
 		this.sessionManager.registerHandler(GiveEffectsFlagHandler.FACTORY(), null);
 
-		this.sessionManager.registerHandler(CommandOnEntryFlagHandler.FACTORY(), null);
-		this.sessionManager.registerHandler(CommandOnExitFlagHandler.FACTORY(), null);
-		this.sessionManager.registerHandler(ConsoleCommandOnEntryFlagHandler.FACTORY(), null);
-		this.sessionManager.registerHandler(ConsoleCommandOnExitFlagHandler.FACTORY(), null);
+		this.sessionManager.registerHandler(CommandOnEntryFlagHandler.FACTORY(plugin), null);
+		this.sessionManager.registerHandler(CommandOnExitFlagHandler.FACTORY(plugin), null);
+		this.sessionManager.registerHandler(ConsoleCommandOnEntryFlagHandler.FACTORY(plugin), null);
+		this.sessionManager.registerHandler(ConsoleCommandOnExitFlagHandler.FACTORY(plugin), null);
 
 		this.getServer().getPluginManager().registerEvents(new PlayerListener(this, this.worldGuardPlugin, this.regionContainer, this.sessionManager), this);
 		this.getServer().getPluginManager().registerEvents(new BlockListener(this.worldGuardPlugin, this.regionContainer, this.sessionManager), this);

@@ -76,9 +76,9 @@
 		</dependency>
 
 		<dependency>
-			<groupId>org.spigotmc</groupId>
-			<artifactId>spigot-api</artifactId>
-			<version>1.20.6-R0.1-SNAPSHOT</version>
+			<groupId>io.papermc.paper</groupId>
+			<artifactId>paper-api</artifactId>
+			<version>1.20.4-R0.1-SNAPSHOT</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
@@ -97,13 +97,15 @@
 			<groupId>com.sk89q.worldguard</groupId>
 			<artifactId>worldguard-core</artifactId>
 			<version>7.0.6</version>
-			<scope>provided</scope>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/lib/worldguard-core-7.0.10-SNAPSHOT.jar</systemPath>
 		</dependency>
 		<dependency>
 			<groupId>com.sk89q.worldguard</groupId>
 			<artifactId>worldguard-bukkit</artifactId>
 			<version>7.0.6</version>
-			<scope>provided</scope>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/lib/worldguard-bukkit-7.0.10-SNAPSHOT-dist.jar</systemPath>
 		</dependency>
 		<dependency>
 			<groupId>com.comphenix.protocol</groupId>
